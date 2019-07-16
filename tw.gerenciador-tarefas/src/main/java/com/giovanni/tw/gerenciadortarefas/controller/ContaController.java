@@ -36,7 +36,7 @@ public class ContaController {
 		ModelAndView mv = new ModelAndView();
 		Usuario usr = null;
 		try { 
-		usr = servicoUsuario.encontrarPorEmail(usuario.getEmail());
+		usr = servicoUsuario.procurarPorEmail(usuario.getEmail());
 		}catch(Exception ee){
 			System.out.println("EMAIL NULO");
 		}

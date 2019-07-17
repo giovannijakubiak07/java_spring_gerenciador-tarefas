@@ -60,7 +60,7 @@ public class TarefasController {
 			mv.addObject(tarefa);
 		}else {
 			String emailUsuario = request.getUserPrincipal().getName();
-			Usuario usuarioLogado = servicoUsuario.procurarPorEmail(emailUsuario);
+			Usuario usuarioLogado = servicoUsuario.encontrarPorEmail(emailUsuario);
 			tarefa.setUsuario(usuarioLogado);
 			repositorioTarefas.save(tarefa);
 			mv.setViewName("redirect:/tarefas/listar");

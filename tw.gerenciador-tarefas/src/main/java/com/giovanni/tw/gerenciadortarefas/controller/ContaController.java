@@ -28,8 +28,7 @@ public class ContaController {
 	public ModelAndView registration() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("conta/registrar");
-		Usuario user = new Usuario();
-		mv.addObject("usuario", user);
+		mv.addObject("usuario", new Usuario());
 		return mv;
 	}
 	
@@ -38,16 +37,18 @@ public class ContaController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		Usuario usr = servicoUsuario.procurarPorEmail(usuario.getEmail());
+		Usuario usr = servicoUsuario.encontrarPorEmail(usuario.getEmail());
 		
 		if(usr!=null) {
-			System.out.println("EMAIL NULO 2");
+			
 			result.rejectValue("email","", "Usuário já cadastrado");
 		}
 		if(result.hasErrors()) {
-			System.out.println("TEM ERROS(?)");
+		
 			mv.setViewName("conta/registrar");
 			mv.addObject("usuario", usuario);
+		}else {
+			servicoUsuario.salvar(usuario);
 			mv.setViewName("redirect:/login");
 		}	
 		return mv;

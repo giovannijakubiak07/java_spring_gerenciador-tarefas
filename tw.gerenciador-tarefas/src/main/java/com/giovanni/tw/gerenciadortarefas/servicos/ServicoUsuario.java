@@ -19,7 +19,7 @@ public class ServicoUsuario {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
-	public Usuario procurarPorEmail(String email) {
+	public Usuario encontrarPorEmail(String email) {
 		
 		return repositorioUsuario.findByEmail(email);
 		

@@ -2,6 +2,7 @@ package com.giovanni.tw.gerenciadortarefas.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import com.giovanni.tw.gerenciadortarefas.servicos.ServicoUsuario;
 @Controller
 public class ContaController {
 
+	@Autowired
 	private ServicoUsuario servicoUsuario;
 	
 	@GetMapping("/login")
@@ -34,12 +36,8 @@ public class ContaController {
 	@PostMapping("/registration")
 	public ModelAndView registration (@Valid Usuario usuario, BindingResult result) {
 		ModelAndView mv = new ModelAndView();
-		Usuario usr = null;
-		try { 
-		usr = servicoUsuario.procurarPorEmail(usuario.getEmail());
-		}catch(Exception ee){
-			System.out.println("EMAIL NULO");
-		}
+		Usuario usr = servicoUsuario.procurarPorEmail(usuario.getEmail());
+		
 		if(usr!=null) {
 			System.out.println("EMAIL NULO 2");
 			result.rejectValue("email","", "Usuário já cadastrado");
